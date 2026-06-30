@@ -4,8 +4,6 @@
 (function () {
   "use strict";
 
-  // === Votre code existant (language toggle, header, mobile nav, tabs, reveal) ===
-
   /* ---------- language toggle (FR / EN) ---------- */
   var STORAGE_KEY = "pi-lang";
   var langButtons = document.querySelectorAll("[data-lang-btn]");
@@ -102,9 +100,10 @@
   var yearEl = document.querySelector("[data-year]");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- NOUVEAU: Set active nav link based on current page ---------- */
+  /* ---------- Set active nav link based on current page ---------- */
   var currentPage = window.location.pathname.split('/').pop() || 'index.html';
   var navLinks = document.querySelectorAll('.main-nav a');
+
   navLinks.forEach(function(link) {
     var linkHref = link.getAttribute('href');
     // Handle home page
@@ -113,6 +112,10 @@
     }
     // Handle other pages
     else if (linkHref !== '/' && currentPage === linkHref) {
+      link.classList.add('active');
+    }
+    // Handle root path
+    else if (currentPage === '' && linkHref === '/') {
       link.classList.add('active');
     }
   });
